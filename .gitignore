@@ -1,0 +1,5 @@
+node_modules/
+dist/
+data_import/
+npm-debug.log*
+gatvesapi/core/Config.php
