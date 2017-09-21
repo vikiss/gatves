@@ -1,7 +1,7 @@
 {
-  "name": "vikisportfolio",
+  "name": "vilniausgatves",
   "version": "1.0.0",
-  "description": "Vikis projects portfolio",
+  "description": "Vilniaus gatvių gyventojai",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --hot",
@@ -11,14 +11,15 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.16.2",
-    "md5-es": "^1.8.1",
     "react": "^15.6.1",
     "react-bootstrap": "^0.31.2",
+    "react-bootstrap-table": "^4.0.5",
     "react-dom": "^15.6.1",
     "webpack": "^3.5.5",
     "webpack-dev-server": "^2.7.1"
   },
   "devDependencies": {
+    "babel-preset-env": "^1.6.0",
     "eslint-config-rallycoding": "^3.2.0"
   }
 }
