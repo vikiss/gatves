@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, ButtonToolbar } from 'react-bootstrap';
 
-class TagSelector extends React.Component {
+class FilterSelector extends React.Component {
   constructor(props) {
      super(props);
      this.setFilter = this.setFilter.bind(this);
@@ -12,15 +12,15 @@ class TagSelector extends React.Component {
 
   setFilter(tag) {
     this.setState({ selected: tag });
-    this.props.handleTagChange(tag);
+    this.props.handleFilterChange(tag);
   }
 
   isActive(value) {
     return ((value === this.state.selected) ? 'primary' : 'info');
   }
 
-  renderTags() {
-     return this.props.tags.map(tag =>
+  renderButtons() {
+    return Object.keys(this.props.filters).map(tag =>
       <Button
       key={tag}
       className="mb1"
@@ -28,30 +28,20 @@ class TagSelector extends React.Component {
       bsSize="xsmall"
       onClick={this.setFilter.bind(this, tag)}
       >
-        {tag}
+        {this.props.filters[tag]}
       </Button>
     );
+  //console.log(`obj.${prop} = ${this.props.filters[prop]}`);
   }
-
-  /* onClick={props.onClick} */
 
 
    render() {
        return (
-           <ButtonToolbar id="TagSelector" className="mb1">
-             <Button
-             key="all"
-             className="mb1"
-             bsStyle={this.isActive('')}
-             bsSize="xsmall"
-             onClick={this.setFilter.bind(this, '')}
-             >
-             Everything
-             </Button>
-              {this.renderTags()}
+           <ButtonToolbar id="FilterSelector" className="mb1">
+              {this.renderButtons()}
            </ButtonToolbar>
          );
       }
 }
 
-export default TagSelector;
+export default FilterSelector;
