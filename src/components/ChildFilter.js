@@ -1,18 +1,18 @@
 import React from 'react';
-import { Nav, NavDropdown, MenuItem } from 'react-bootstrap';
+import { NavDropdown, MenuItem } from 'react-bootstrap';
 
-class SortSelector extends React.Component {
+class ChildFilter extends React.Component {
   constructor(props) {
      super(props);
-     this.setSort = this.setSort.bind(this);
+     this.setFilter = this.setFilter.bind(this);
      this.state = {
        selected: ''
      };
    }
 
-  setSort(tag) {
+  setFilter(tag) {
     this.setState({ selected: tag });
-    this.props.handleSortChange(tag);
+    this.props.handleChildFilterChange(tag);
   }
 
   isActive(value) {
@@ -20,15 +20,15 @@ class SortSelector extends React.Component {
   }
 
   renderButtons() {
-    return Object.keys(this.props.sorts).map(tag =>
+    return Object.keys(this.props.filters).map(tag =>
       <MenuItem
       key={tag}
       className="mb1"
       bsStyle={this.isActive(tag)}
       bsSize="xsmall"
-      onClick={this.setSort.bind(this, tag)}
+      onClick={this.setFilter.bind(this, tag)}
       >
-        {this.props.sorts[tag]}
+        {this.props.filters[tag]}
       </MenuItem>
     );
   }
@@ -36,13 +36,11 @@ class SortSelector extends React.Component {
 
    render() {
        return (
-         <Nav pullRight>
-           <NavDropdown id="SortSelector" title={this.props.sortlabel}>
+           <NavDropdown id="ChildFilter" title={this.props.childfilterlabel} className="mb1">
               {this.renderButtons()}
            </NavDropdown>
-          </Nav>
          );
       }
 }
 
-export default SortSelector;
+export default ChildFilter;

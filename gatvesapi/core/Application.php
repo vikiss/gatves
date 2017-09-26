@@ -150,10 +150,20 @@ class View
 
     
     public function renderJSON($data)
-    {
-		header("Access-Control-Allow-Origin: *");
+    {   
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Credentials: true");
+        header("Access-Control-Allow-Methods: GET,HEAD,OPTIONS,POST,PUT");
+        header("Access-Control-Allow-Headers: Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Authorization");
         header("Content-Type: application/json");
         echo json_encode($data);
+    }
+    
+        public function renderCSV($data)
+    {
+       header('Content-Type: application/octet-stream');
+       header('Content-Disposition: attachment; filename="gyventojai.csv"');
+       print $data;
     }
 
     

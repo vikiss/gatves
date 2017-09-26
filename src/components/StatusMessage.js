@@ -1,7 +1,9 @@
 import React from 'react';
 import { Panel, Glyphicon } from 'react-bootstrap';
 
+
 class StatusMessage extends React.Component {
+
    render() {
       return (
          <Panel>

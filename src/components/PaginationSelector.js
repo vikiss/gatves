@@ -1,5 +1,5 @@
 import React from 'react';
-import { Nav, NavDropdown, MenuItem } from 'react-bootstrap';
+import { ButtonToolbar, SplitButton, MenuItem } from 'react-bootstrap';
 
 class PaginationSelector extends React.Component {
   constructor(props) {
@@ -36,11 +36,11 @@ class PaginationSelector extends React.Component {
 
    render() {
        return (
-         <Nav bsStyle="pills">
-           <NavDropdown id="CountSelector" title={this.props.paginationlabel} className="mb1">
+         <ButtonToolbar>
+           <SplitButton dropup id="CountSelector" title={this.props.paginationlabel} className="">
               {this.renderCounts()}
-           </NavDropdown>
-          </Nav>
+           </SplitButton>
+          </ButtonToolbar>
          );
       }
 }

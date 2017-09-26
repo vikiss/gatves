@@ -3,3 +3,4 @@ dist/
 data_import/
 npm-debug.log*
 gatvesapi/core/Config.php
+index.html

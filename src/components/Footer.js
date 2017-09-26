@@ -1,11 +1,20 @@
 import React from 'react';
+import { Row, Col } from 'react-bootstrap';
 
 class Footer extends React.Component {
    render() {
       return (
-         <p className="text-muted">
-            <small>{this.props.footerText}</small>
+        <Row>
+         <Col md={12}>
+         <p className="text-muted text-right">
+            <small>
+              <a href={this.props.hrefText}>
+                {this.props.footerText}
+              </a>
+            </small>
          </p>
+         </Col>
+         </Row>
       );
    }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
-import { Button, ButtonToolbar } from 'react-bootstrap';
+import { NavDropdown, MenuItem } from 'react-bootstrap';
 
-class FilterSelector extends React.Component {
+class GenderFilter extends React.Component {
   constructor(props) {
      super(props);
      this.setFilter = this.setFilter.bind(this);
@@ -12,7 +12,7 @@ class FilterSelector extends React.Component {
 
   setFilter(tag) {
     this.setState({ selected: tag });
-    this.props.handleFilterChange(tag);
+    this.props.handleGenderFilterChange(tag);
   }
 
   isActive(value) {
@@ -21,7 +21,7 @@ class FilterSelector extends React.Component {
 
   renderButtons() {
     return Object.keys(this.props.filters).map(tag =>
-      <Button
+      <MenuItem
       key={tag}
       className="mb1"
       bsStyle={this.isActive(tag)}
@@ -29,19 +29,18 @@ class FilterSelector extends React.Component {
       onClick={this.setFilter.bind(this, tag)}
       >
         {this.props.filters[tag]}
-      </Button>
+      </MenuItem>
     );
-  //console.log(`obj.${prop} = ${this.props.filters[prop]}`);
   }
 
 
    render() {
        return (
-           <ButtonToolbar id="FilterSelector" className="mb1">
+           <NavDropdown id="GenderFilter" title={this.props.genderfilterlabel} className="mb1">
               {this.renderButtons()}
-           </ButtonToolbar>
+           </NavDropdown>
          );
       }
 }
 
-export default FilterSelector;
+export default GenderFilter;

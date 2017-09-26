@@ -10,6 +10,7 @@ class AutosuggestFilter extends React.Component {
     this.onSuggestionsClearRequested = this.onSuggestionsClearRequested.bind(this);
     this.getSuggestionValue = this.getSuggestionValue.bind(this);
     this.getSuggestions = this.getSuggestions.bind(this);
+    this.onSuggestionSelected = this.onSuggestionSelected.bind(this);
 
     this.state = {
       value: '',
@@ -20,6 +21,12 @@ class AutosuggestFilter extends React.Component {
 
 componentWillMount() {
     this.readStreets();
+  }
+
+  componentWillReceiveProps() {
+    if (this.props.clearSuggest() === 'clear') {
+      this.setState({ value: '' });
+    }
   }
 
 escapeRegexCharacters(str) {
@@ -45,11 +52,6 @@ readStreets() {
 
 onChange(event, { newValue }) {
   this.setState({ value: newValue });
-    //this.setState({ value: newValue }, () => {
-    //     if (this.state.value.length > 2) {
-    //        this.readStreets();
-    //      }
-  //});
   }
 
   getSuggestions(value) {
@@ -59,7 +61,7 @@ onChange(event, { newValue }) {
       return [];
     }
 
-    const regex = new RegExp('^' + escapedValue, 'i');
+    const regex = new RegExp(escapedValue, 'i');
     return streets.filter(street => regex.test(street.street));
   }
 
@@ -77,8 +79,11 @@ onChange(event, { newValue }) {
   }
 
   getSuggestionValue(suggestion) {
-    this.props.handleSuggestChange(suggestion.street);
     return suggestion.street;
+  }
+
+  onSuggestionSelected(event, { suggestionValue }) {
+    this.props.handleSuggestChange(suggestionValue);
   }
 
 
@@ -87,6 +92,10 @@ onChange(event, { newValue }) {
       <span>{suggestion.street}</span>
       );
   }
+
+shouldRenderSuggestions(value) {
+  return value.trim().length > 2;
+}
 
 
    render() {
@@ -104,6 +113,8 @@ onChange(event, { newValue }) {
         getSuggestionValue={this.getSuggestionValue}
         renderSuggestion={this.renderSuggestion}
         inputProps={inputProps}
+        shouldRenderSuggestions={this.shouldRenderSuggestions}
+        onSuggestionSelected={this.onSuggestionSelected}
       />
       );
    }
