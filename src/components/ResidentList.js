@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
-import { Row, Col, Navbar, Nav, NavItem, FormGroup } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 import qs from 'qs';
 import { Base64 } from 'js-base64';
+import NavigationBar from './NavigationBar';
 import ResidentTable from './ResidentTable';
-import ChildFilter from './ChildFilter';
-import GenderFilter from './GenderFilter';
 import PaginationSelector from './PaginationSelector';
 import PaginationStrip from './PaginationStrip';
-import SortSelector from './SortSelector';
 import StatusMessage from './StatusMessage';
-import AutosuggestFilter from './AutosuggestFilter';
+
 
 class ResidentList extends Component {
   constructor(props) {
@@ -280,52 +278,21 @@ commitApiDelete() {
   render() {
       return (
         <div>
-           <Navbar fixedTop inverse>
-            <Navbar.Header>
-              <Navbar.Brand onClick={this.clearFilters}>
-               Vilniaus gyventojai
-              </Navbar.Brand>
-              <Navbar.Toggle />
-            </Navbar.Header>
-            <Navbar.Collapse>
-              <Nav>
-                <NavItem
-                 disabled={this.state.clearButtonState}
-                 onClick={this.clearFilters}
-                >
-                  Išvalyti filtrus
-                </NavItem>
-                <ChildFilter
-                   filters={this.state.childfilters}
-                   selected={this.state.selected}
-                   childfilterlabel={this.state.childfilterlabel}
-                   handleChildFilterChange={this.handleChildFilterChange}
-                />
-                <GenderFilter
-                   filters={this.state.genderfilters}
-                   selected={this.state.selected}
-                   genderfilterlabel={this.state.genderfilterlabel}
-                   handleGenderFilterChange={this.handleGenderFilterChange}
-                />
-              </Nav>
-              <SortSelector
-                  sorts={this.state.sortoptions}
-                  sortlabel={this.state.sortlabel}
-                  selected={this.state.selected}
-                  handleSortChange={this.handleSortChange}
-              />
-              <Navbar.Form>
-                <FormGroup>
-                  <AutosuggestFilter
-                      placeholder="Gatvė"
-                      handleSuggestChange={this.handleSuggestChange}
-                      clearSuggest={this.clearSuggest}
-                  />
-                </FormGroup>
-              </Navbar.Form>
-            </Navbar.Collapse>
-           </Navbar>
-
+           <NavigationBar
+            clearFilters={this.clearFilters}
+            clearButtonState={this.state.clearButtonState}
+            childfilters={this.state.childfilters}
+            childfilterlabel={this.state.childfilterlabel}
+            handleChildFilterChange={this.handleChildFilterChange}
+            genderfilters={this.state.genderfilters}
+            genderfilterlabel={this.state.genderfilterlabel}
+            handleGenderFilterChange={this.handleGenderFilterChange}
+            sortoptions={this.state.sortoptions}
+            sortlabel={this.state.sortlabel}
+            handleSortChange={this.handleSortChange}
+            handleSuggestChange={this.handleSuggestChange}
+            clearSuggest={this.clearSuggest}
+           />
            <Row>
             <Col md={12}>
               <StatusMessage statusText={this.state.status} />
